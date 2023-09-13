@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SSH Terminal</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <h1>SSH Terminal</h1>
+
+    <form id="ssh-form">
+      <label for="command">Wprowadź polecenie SSH:</label>
+      <input type="text" id="command" name="command" required />
+      <button type="submit">Wykonaj</button>
+    </form>
+
+    <h2>Wynik:</h2>
+    <pre id="output"></pre>
+
+    <script>
+      const form = document.getElementById("ssh-form");
+      const output = document.getElementById("output");
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const command = formData.get("command");
+
+        try {
+          const response = await fetch("/ssh", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ command }),
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            output.textContent =
+              data.output || data.error || "Brak danych wyjściowych.";
+          } else {
+            output.textContent = "Błąd podczas wysyłania żądania SSH.";
+          }
+        } catch (error) {
+          console.error("Błąd:", error);
+          output.textContent = "Błąd podczas komunikacji z serwerem.";
+        }
+      });
+    </script>
+  </body>
+</html>
