@@ -4,27 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SSH Terminal</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <div id="container">
-      <div id="nav">
-        <h1>SSH</h1>
-        <div id="status">
-          <div id="dot"></div>
-          <p id="pingStatus"><span id="onlineStatus">Offline</span></p>
+  <body
+    class="bg-gray-900 text-white flex items-center justify-center h-screen"
+  >
+    <div id="container" class="bg-gray-800 rounded overflow-hidden w-96">
+      <div
+        id="nav"
+        class="flex justify-between items-center p-4 bg-gray-800 border-b border-gray-700"
+      >
+        <h1 class="text-blue-400">SSH</h1>
+        <div id="status" class="flex items-center">
+          <div
+            id="dot"
+            class="w-4 h-4 bg-red-500 rounded-full mr-2 animate-pulse"
+          ></div>
+          <p id="pingStatus" class="mr-2">
+            <span id="onlineStatus">Offline</span>
+          </p>
           <p id="ping"><span id="pingValue">N/A</span> ms</p>
         </div>
       </div>
 
-      <pre id="output" class="console"></pre>
+      <pre id="output" class="console p-4 w-full text-center"></pre>
 
-      <form id="ssh-form">
-        <div id="command-form">
-          <label for="command">Wprowadź polecenie SSH:</label>
-          <input type="text" id="command" name="command" />
+      <form id="ssh-form" class="p-4">
+        <div id="command-form" class="flex flex-col items-center">
+          <label for="command" class="mb-2 text-blue-400"
+            >Enter SSH command:</label
+          >
+          <input
+            type="text"
+            id="command"
+            name="command"
+            class="p-2 mb-2 text-black"
+          />
           <div class="buttony">
-            <button type="submit">Wykonaj</button>
+            <button
+              type="submit"
+              class="p-2 bg-blue-400 text-white rounded cursor-pointer transition duration-300 hover:bg-blue-500"
+            >
+              Execute
+            </button>
           </div>
         </div>
       </form>
@@ -72,14 +97,13 @@
 
           if (response.ok) {
             const data = await response.json();
-            output.textContent =
-              data.output || data.error || "Brak danych wyjściowych.";
+            output.textContent = data.output || data.error || "No output data.";
           } else {
-            output.textContent = "Błąd podczas wysyłania żądania SSH.";
+            output.textContent = "Error sending SSH request.";
           }
         } catch (error) {
-          console.error("Błąd:", error);
-          output.textContent = "Błąd podczas komunikacji z serwerem.";
+          console.error("Error:", error);
+          output.textContent = "Error communicating with the server.";
         }
       });
     </script>
