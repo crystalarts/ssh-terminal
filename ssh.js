@@ -32,7 +32,7 @@ ssh
 app.post("/ssh", async (req, res) => {
   const { command } = req.body;
 
-  const fullCommand = `echo "$USER@$HOST~ ${command}" && ${command}`;
+  const fullCommand = `echo $USER@$HOST~ ${command}" && ${command}`;
 
   try {
     const result = await ssh.execCommand(fullCommand, [], {
@@ -65,9 +65,25 @@ app.post("/ssh", async (req, res) => {
   }
 });
 
+let lastPingTime = Date.now()
+
+app.get("/ping", (req,res) => {
+  const currentTime = Date.now()
+  const ping = currentTime - lastPingTime;
+  const online = ping < 1500;
+  const stability = ping < 250 ? "Brak zakłuceń" : "Występują zakłucenia"
+
+  lastPingTime = currentTime;
+
+  res.json({
+    online,
+    ping,
+    stability,
+  })
+})
+
 wss.on("connection", (ws) => {
   console.log("Nowy klient WebSocket połączony.");
-
   ws.on("close", () => {
     console.log("Klient WebSocket rozłączony.");
   });

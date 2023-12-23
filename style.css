@@ -1,68 +1,150 @@
 body {
-  font-family: "Courier New", Courier, monospace;
-  background-color: #1e1e1e;
-  color: #00ff00;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #282c35;
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  color: #fff;
 }
 
-h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
+#container {
+  background-color: #1e2228;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 400px;
 }
 
-form {
+#nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #1e2228;
+  border-bottom: 1px solid #30363d;
+}
+
+#nav h1 {
+  color: #61dafb;
+  margin: 0;
+}
+
+#status {
+  display: flex;
+  align-items: center;
+  margin: 10px 20px;
+}
+
+#dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ff5555;
+  border-radius: 50%;
+  margin-right: 10px;
+  animation: pulse 1s infinite;
+}
+
+#dot.online {
+  background-color: #64ffda;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    box-shadow: 0 0 0 0 rgba(255, 85, 85, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(255, 85, 85, 0);
+  }
+  100% {
+    transform: scale(0.8);
+    box-shadow: 0 0 0 0 rgba(255, 85, 85, 0);
+  }
+}
+
+#pingStatus span {
+  font-weight: bold;
+}
+
+#ping {
+  margin-left: 15px;
+}
+
+#ping {
+  color: #bbe1fa;
+}
+
+.console {
+  display: flex;
+  overflow-y: auto;
+  max-height: 200px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+}
+
+#command-form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 20px;
 }
 
 label {
-  font-size: 18px;
+  margin-bottom: 10px;
+  color: #bbe1fa;
 }
 
-input[type="text"] {
-  padding: 10px;
-  margin: 10px 0;
-  border: 2px solid #00ff00;
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: #1e1e1e;
-  color: #00ff00;
+input {
+  padding: 8px;
+  margin-bottom: 10px;
 }
 
 button {
-  padding: 10px 20px;
-  background-color: #00ff00;
-  color: #1e1e1e;
+  padding: 10px;
+  background-color: #61dafb;
+  color: #fff;
   border: none;
   border-radius: 4px;
-  font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #009900;
+  background-color: #4fa3d1;
 }
 
-h2 {
-  font-size: 18px;
-  margin-top: 20px;
-}
-
-pre {
-  background-color: #1e1e1e;
-  padding: 10px;
-  border: 2px solid #00ff00;
-  border-radius: 4px;
-  max-width: 600px;
-  overflow-x: auto;
+#output {
   white-space: pre-wrap;
-  font-size: 16px;
-  color: #00ff00;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+#ping {
+  color: #bbe1fa;
+  position: relative;
+}
+
+.ping-info {
+  width: 200px;
+  position: absolute;
+  top: 115%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid #616161;
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 4px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s ease;
+}
+
+#ping:hover .ping-info {
+  visibility: visible;
+  opacity: 1;
 }
