@@ -17,8 +17,7 @@ function Home() {
         <Output logs={logs} />
         <Form setLogs={setLogs} />
       </div>
-      {/* FIX: Can't select input */}
-      {/* <Background /> */}
+      <Background />
     </>
   );
 }
