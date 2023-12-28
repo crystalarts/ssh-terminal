@@ -23,18 +23,25 @@ export default function Form({ setLogs }: { setLogs: any }) {
   };
 
   return (
-    <form id="ssh-form" onSubmit={sendRequest}>
-      <div id="command-form">
-        <label htmlFor="command">Enter SSH command:</label>
+    <form onSubmit={sendRequest}>
+      <div className="flex flex-col items-center m-5">
+        <label htmlFor="command" className="mb-[10px] text-[#bbe1fa]">
+          Enter SSH command:
+        </label>
         <input
           type="text"
           id="command"
-          name="command"
+          className="p-2 mb-[10px] text-black"
           required
           onChange={(e) => setCommand(e.target.value)}
         />
-        <div className="buttony">
-          <button type="submit">Execute</button>
+        <div>
+          <button
+            type="submit"
+            className="p-[10px] bg-[#2f7a8f] text-white border-none rounded pointer hover:bg-[#347ba1] transition-all duration-300"
+          >
+            Execute
+          </button>
         </div>
       </div>
     </form>

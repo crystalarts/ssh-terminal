@@ -27,7 +27,7 @@ function Ping() {
 
   return (
     <div id="status">
-      <div id="dot" className={isOnline}></div>
+      <div id="dot"></div>
       <p id="pingStatus">
         <span id="onlineStatus">{isOnline}</span>
       </p>
