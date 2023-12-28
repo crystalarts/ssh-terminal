@@ -9,9 +9,9 @@ function Home() {
 
   return (
     <>
-      <div id="container">
-        <div id="nav">
-          <h1>SSH</h1>
+      <div className="bg-[#1e2228] rounded-lg border border-[#464c5f] overflow-hidden w-[400px] relative z-50">
+        <div className="flex justify-between items-center py-3 px-5 bg-[#1e2228] border-b-[1px] border-[#464c5f]">
+          <h1 className="m-0 text-[#2c8199] text-3xl font-bold">SSH</h1>
           <Ping />
         </div>
         <Output logs={logs} />
